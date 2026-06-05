@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIPC | قاعدة معرفة مركز مشاريع البنية التحتية بمنطقة الرياض</title>
+  <meta name="description" content="قاعدة معرفة احترافية شاملة لأنظمة ولوائح وإجراءات ومخالفات مركز مشاريع البنية التحتية بمنطقة الرياض RIPC" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== MEGA HEADER ===================== -->
+<header class="mega-header">
+
+  <!-- Top Accent Bar -->
+  <div class="header-accent-bar">
+    <div class="accent-bar-inner">
+      <span class="accent-item">📍 منطقة الرياض</span>
+      <span class="accent-sep">|</span>
+      <span class="accent-item">📋 الإصدار 1.1 - 2025</span>
+      <span class="accent-sep">|</span>
+      <span class="accent-item">🔗 ripc.gov.sa</span>
+      <div class="accent-actions">
+        <button class="header-ctrl" id="theme-toggle" onclick="toggleTheme()" title="تبديل المظهر">
+          <span id="theme-icon">🌙</span>
+        </button>
+        <button class="header-ctrl lang-ctrl" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header Row -->
+  <div class="header-main-row">
+
+    <!-- LEFT: RIPC Logo -->
+    <div class="logo-block ripc-block">
+      <img src="ripc_logo.png" alt="مركز مشاريع البنية التحتية بمنطقة الرياض" class="ripc-img" />
+    </div>
+
+    <!-- CENTER: Dashboard Title -->
+    <div class="header-center-block">
+      <div class="header-main-title">قاعدة المعرفة التشغيلية</div>
+      <div class="header-main-subtitle">الأنظمة | اللوائح | المخالفات | الامتثال | التقارير</div>
+      <div class="header-tags">
+        <span class="htag green">🟢 52 مخالفة</span>
+        <span class="htag purple">🔵 12 نظام</span>
+        <span class="htag gold">🟡 15 مؤشر KPI</span>
+        <span class="htag red">🔴 100K غرامة قصوى</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Alasas Logo -->
+    <div class="logo-block alasas-block">
+      <img src="alasas_logo.png" alt="شركة الأساس العريض" class="alasas-img" />
+    </div>
+
+  </div><!-- end header-main-row -->
+
+  <!-- Header Nav Strip -->
+  <div class="header-nav-strip">
+    <button class="menu-toggle-btn" id="menu-toggle" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      القائمة
+    </button>
+    <div class="header-breadcrumb">
+      <span class="hb-icon">🏠</span>
+      <span id="breadcrumb" data-i18n="nav.dashboard">نظرة عامة</span>
+    </div>
+    <div class="header-search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="global-search" placeholder="بحث سريع في قاعدة البيانات..." />
+    </div>
+    <div class="header-strip-actions">
+      <button class="strip-btn" onclick="exportData()">⬇️ تصدير</button>
+      <a href="https://www.ripc.gov.sa/ar" target="_blank" class="strip-btn strip-btn-outline">🌐 ripc.gov.sa</a>
+    </div>
+  </div>
+
+</header>
+
+<!-- ===================== LAYOUT ===================== -->
+<div class="layout-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+
+      <div class="nav-group-label">لوحة التحكم</div>
+      <a href="#" class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span>
+        <span>نظرة عامة</span>
+      </a>
+
+      <div class="nav-group-label">الأنظمة والإجراءات</div>
+      <a href="#" class="nav-item" data-tab="regulations" id="nav-regulations">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        <span>الأنظمة واللوائح</span>
+        <span class="nav-badge">12</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="procedures" id="nav-procedures">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <span>دورة حياة الترخيص</span>
+        <span class="nav-badge">12</span>
+      </a>
+
+      <div class="nav-group-label">المخالفات والامتثال</div>
+      <a href="#" class="nav-item" data-tab="violations" id="nav-violations">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <span>المخالفات والجزاءات</span>
+        <span class="nav-badge critical">52</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="fines" id="nav-fines">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+        <span>جدول الغرامات</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="compliance" id="nav-compliance">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+        <span>قوائم الامتثال</span>
+        <span class="nav-badge green">38</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="prevention" id="nav-prevention">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span>منع المخالفات</span>
+      </a>
+
+      <div class="nav-group-label">التحليل والتقارير</div>
+      <a href="#" class="nav-item" data-tab="risk" id="nav-risk">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+        <span>مصفوفة المخاطر</span>
+        <span class="nav-badge warn">15</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="kpi" id="nav-kpi">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        <span>مؤشرات الأداء KPI</span>
+        <span class="nav-badge">15</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="reports" id="nav-reports">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+        <span>التقارير التنفيذية</span>
+        <span class="nav-badge">8</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="database" id="nav-database">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span>
+        <span>قاعدة البيانات</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sb-footer-badge"><span class="sb-pulse"></span> مُحدَّث 2025</div>
+      <div class="sb-footer-text">قرار وزراء 902 / 1444هـ</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content" id="main-content">
+    <div class="content-area">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="tab-content active" id="tab-dashboard">
+        <div class="page-hero">
+          <div class="page-hero-text">
+            <h1>مركز مشاريع البنية التحتية بمنطقة الرياض</h1>
+            <p>قاعدة معرفة احترافية شاملة للأنظمة واللوائح والإجراءات والمخالفات والامتثال</p>
+          </div>
+          <div class="page-hero-stats">
+            <div class="hs"><span class="hs-num" data-count="52">0</span><span class="hs-lbl">مخالفة</span></div>
+            <div class="hs"><span class="hs-num" data-count="12">0</span><span class="hs-lbl">نظام</span></div>
+            <div class="hs"><span class="hs-num" data-count="15">0</span><span class="hs-lbl">KPI</span></div>
+            <div class="hs"><span class="hs-num">100K</span><span class="hs-lbl">غرامة قصوى</span></div>
+          </div>
+        </div>
+
+        <!-- ===== AI QUICK ASK SECTION ===== -->
+        <a href="https://gemini.google.com/gem/1ZWAMoRV6YmsVOrBaflmFUQKmod6mgZIo?usp=sharing" target="_blank" class="ai-ask-card-link">
+          <div class="ai-ask-card">
+            <div class="ai-ask-header">
+              <div class="ai-ask-title-wrap">
+                <span class="ai-ask-icon">🤖</span>
+                <div>
+                  <h3>اسأل جيميني (Ask Gemini)</h3>
+                  <p>المساعد الذكي: اضغط هنا للانتقال مباشرة إلى محادثة Gemini وطرح استفساراتك حول مركز مشاريع البنية التحتية</p>
+                </div>
+              </div>
+              <div class="ai-ask-status">رابط محادثة نشط 🔗</div>
+            </div>
+            <div class="ai-ask-body">
+              <div class="ai-ask-link-btn">
+                <span>💬 ابدأ الاستفسار الآن مع مساعد Gemini الذكي</span>
+                <span class="btn-arrow">←</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+          <div class="stat-card sc-green">
+            <div class="sc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="sc-body">
+              <div class="sc-num" data-count="12">0</div>
+              <div class="sc-label">الأنظمة واللوائح</div>
+              <div class="sc-sub">محدّث 2025</div>
+            </div>
+          </div>
+          <div class="stat-card sc-red">
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="sc-body">
+              <div class="sc-num" data-count="52">0</div>
+              <div class="sc-label">نوع المخالفة</div>
+              <div class="sc-sub">5 درجات خطورة</div>
+            </div>
+          </div>
+          <div class="stat-card sc-orange">
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <div class="sc-body">
+              <div class="sc-num" id="max-fine">0</div>
+              <div class="sc-label">الحد الأقصى للغرامة</div>
+              <div class="sc-sub">ريال سعودي</div>
+            </div>
+          </div>
+          <div class="stat-card sc-blue">
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="sc-body">
+              <div class="sc-num" data-count="12">0</div>
+              <div class="sc-label">مرحلة ترخيص</div>
+              <div class="sc-sub">من الطلب للإقفال</div>
+            </div>
+          </div>
+          <div class="stat-card sc-purple">
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+            <div class="sc-body">
+              <div class="sc-num" data-count="38">0</div>
+              <div class="sc-label">بند امتثال</div>
+              <div class="sc-sub">قوائم تحقق شاملة</div>
+            </div>
+          </div>
+          <div class="stat-card sc-teal">
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div class="sc-body">
+              <div class="sc-num" data-count="15">0</div>
+              <div class="sc-label">مؤشر أداء KPI</div>
+              <div class="sc-sub">قابل للقياس</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="charts-row">
+          <!-- Bar Chart -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>📊 توزيع المخالفات حسب الفئة</h3>
+              <span class="live-dot"><span class="pulse"></span>LIVE</span>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-item"><span class="bl">السلامة والمرور</span><div class="bw"><div class="bf" style="background:linear-gradient(90deg,#ef4444,#dc2626)" data-value="85"></div></div><span class="bv red-t">18</span></div>
+              <div class="bar-item"><span class="bl">التراخيص والتصاريح</span><div class="bw"><div class="bf" style="background:linear-gradient(90deg,#f97316,#ea580c)" data-value="70"></div></div><span class="bv orange-t">14</span></div>
+              <div class="bar-item"><span class="bl">الجودة والمواصفات</span><div class="bw"><div class="bf" style="background:linear-gradient(90deg,#eab308,#ca8a04)" data-value="55"></div></div><span class="bv yellow-t">11</span></div>
+              <div class="bar-item"><span class="bl">النظافة والبيئة</span><div class="bw"><div class="bf" style="background:linear-gradient(90deg,#4F9D6F,#3d7a56)" data-value="40"></div></div><span class="bv green-t">8</span></div>
+              <div class="bar-item"><span class="bl">الاعتماد والتأهيل</span><div class="bw"><div class="bf" style="background:linear-gradient(90deg,#86519B,#6b3d7a)" data-value="25"></div></div><span class="bv purple-t">5</span></div>
+            </div>
+          </div>
+
+          <!-- Donut Chart -->
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>🎯 مستويات الخطورة</h3></div>
+            <div class="donut-wrap">
+              <div class="donut-canvas-wrap">
+                <canvas id="severityChart" width="160" height="160"></canvas>
+                <div class="donut-center-label"><span class="dcn">52</span><span class="dcl">مخالفة</span></div>
+              </div>
+              <div class="donut-legend">
+                <div class="dl-item"><span class="dl-dot" style="background:#ef4444"></span><span>حرجة (8)</span><span class="dl-pct red-t">15%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#f97316"></span><span>جسيمة (14)</span><span class="dl-pct orange-t">27%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#eab308"></span><span>متوسطة (16)</span><span class="dl-pct yellow-t">31%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#4F9D6F"></span><span>غير جسيمة (11)</span><span class="dl-pct green-t">21%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#94a3b8"></span><span>بسيطة (3)</span><span class="dl-pct">6%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Alerts -->
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>⚡ تنبيهات حرجة</h3></div>
+            <div class="alerts-stack">
+              <div class="alert-row a-critical"><span class="ar-icon">🚫</span><div class="ar-body"><strong>العمل بدون ترخيص</strong><small>50,000 ر.س + إيقاف + إحالة قانونية</small></div><span class="ar-badge">حرجة</span></div>
+              <div class="alert-row a-high"><span class="ar-icon">💥</span><div class="ar-body"><strong>إتلاف خطوط الخدمات</strong><small>100,000 ر.س + تعويض كامل</small></div><span class="ar-badge">حرجة</span></div>
+              <div class="alert-row a-medium"><span class="ar-icon">⏰</span><div class="ar-body"><strong>انتهاء الترخيص</strong><small>25,000 ر.س + إيقاف فوري</small></div><span class="ar-badge">جسيمة</span></div>
+              <div class="alert-row a-low"><span class="ar-icon">🚦</span><div class="ar-body"><strong>إغلاق الطريق بدون موافقة</strong><small>20,000 ر.س + تصحيح</small></div><span class="ar-badge">جسيمة</span></div>
+              <div class="alert-row a-green"><span class="ar-icon">🪧</span><div class="ar-body"><strong>عدم وضع اللوحات التحذيرية</strong><small>5,000 ر.س + مهلة 48 ساعة</small></div><span class="ar-badge">متوسطة</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About RIPC -->
+        <div class="about-ripc-card">
+          <div class="about-ripc-header">
+            <div class="about-ripc-icon">🏛️</div>
+            <div>
+              <h3>عن مركز مشاريع البنية التحتية بمنطقة الرياض (RIPC)</h3>
+              <p>الجهة التنظيمية الرئيسية لأعمال البنية التحتية في منطقة الرياض</p>
+            </div>
+          </div>
+          <div class="about-grid">
+            <div class="about-cell"><span class="about-lbl">الاسم الرسمي</span><span>مركز مشاريع البنية التحتية بمنطقة الرياض</span></div>
+            <div class="about-cell"><span class="about-lbl">الاختصار</span><span class="ripc-chip">RIPC</span></div>
+            <div class="about-cell"><span class="about-lbl">السند النظامي</span><span>قرار مجلس الوزراء رقم 902 / 30-12-1444هـ</span></div>
+            <div class="about-cell"><span class="about-lbl">نطاق الاختصاص</span><span>منطقة الرياض - المملكة العربية السعودية</span></div>
+            <div class="about-cell"><span class="about-lbl">الموقع الرسمي</span><a href="https://www.ripc.gov.sa/ar" target="_blank">ripc.gov.sa ↗</a></div>
+            <div class="about-cell"><span class="about-lbl">دليل الكود</span><a href="https://www.ripc.gov.sa/assets/heroslider/RIPCCodeManualEN.pdf" target="_blank">RIPC Code Manual V1.1 ↗</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== OTHER TABS ===== -->
+      <div class="tab-content" id="tab-regulations">
+        <div class="page-header"><h1>📋 الأنظمة واللوائح</h1><p>جميع الأنظمة واللوائح والأدلة الصادرة عن مركز RIPC</p></div>
+        <div class="regulations-grid" id="regulations-grid"></div>
+      </div>
+
+      <div class="tab-content" id="tab-procedures">
+        <div class="page-header"><h1>🔄 دورة حياة الترخيص</h1><p>المراحل الـ 12 الكاملة من الطلب حتى الإقفال</p></div>
+        <div class="lifecycle-container" id="lifecycle-container"></div>
+      </div>
+
+      <div class="tab-content" id="tab-violations">
+        <div class="page-header"><h1>⚠️ المخالفات والجزاءات</h1><p>52 مخالفة مصنفة بالغرامات والإجراءات التصحيحية</p></div>
+        <div class="table-controls">
+          <div class="filter-group">
+            <select id="violation-filter-category" onchange="filterViolations()"><option value="">جميع الفئات</option><option value="تراخيص">التراخيص</option><option value="سلامة">السلامة</option><option value="جودة">الجودة</option><option value="نظافة">النظافة</option><option value="اعتماد">الاعتماد</option></select>
+            <select id="violation-filter-severity" onchange="filterViolations()"><option value="">جميع الدرجات</option><option value="حرجة">حرجة</option><option value="جسيمة">جسيمة</option><option value="متوسطة">متوسطة</option><option value="غير جسيمة">غير جسيمة</option></select>
+            <input type="text" placeholder="🔍 بحث..." id="violation-search" oninput="filterViolations()" />
+          </div>
+          <div class="table-actions"><button onclick="exportViolationsCSV()">⬇️ CSV</button><button onclick="exportToExcel()">📊 Excel</button></div>
+        </div>
+        <div class="table-container"><table class="data-table"><thead><tr><th>#</th><th>المخالفة</th><th>الفئة</th><th>التصنيف</th><th>الغرامة (ر.س)</th><th>التكرار</th><th>الإجراء</th><th>التأثير</th></tr></thead><tbody id="violations-tbody"></tbody></table></div>
+      </div>
+
+      <div class="tab-content" id="tab-fines">
+        <div class="page-header"><h1>💰 جدول الغرامات</h1><p>تفاصيل الغرامات المالية وسلّم التصعيد</p></div>
+        <div class="fines-grid" id="fines-grid"></div>
+        <div class="escalation-card"><h3>📈 سلّم تصاعد العقوبات</h3>
+          <div class="escalation-steps">
+            <div class="step step-1"><div class="sn">1</div><strong>إنذار</strong><p>أول مخالفة غير جسيمة + مهلة</p></div>
+            <div class="sa">→</div><div class="step step-2"><div class="sn">2</div><strong>غرامة</strong><p>عدم الامتثال</p></div>
+            <div class="sa">→</div><div class="step step-3"><div class="sn">3</div><strong>مضاعفة</strong><p>التكرار خلال السنة</p></div>
+            <div class="sa">→</div><div class="step step-4"><div class="sn">4</div><strong>إيقاف</strong><p>التكرار الثالث</p></div>
+            <div class="sa">→</div><div class="step step-5"><div class="sn">5</div><strong>إلغاء + إحالة</strong><p>استمرار المخالفة</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-compliance">
+        <div class="page-header"><h1>✅ قوائم الامتثال</h1><p>38 بند تفاعلي للتحقق من الامتثال</p></div>
+        <div class="checklist-container" id="checklist-container"></div>
+      </div>
+
+      <div class="tab-content" id="tab-prevention">
+        <div class="page-header"><h1>🛡️ منع المخالفات</h1><p>الدليل العملي لتفادي المخالفات في كل مرحلة</p></div>
+        <div class="prevention-phases" id="prevention-phases"></div>
+      </div>
+
+      <div class="tab-content" id="tab-risk">
+        <div class="page-header"><h1>📈 مصفوفة المخاطر</h1></div>
+        <div class="risk-matrix-card"><div class="matrix-grid" id="risk-matrix"></div></div>
+        <h3 class="section-title">📋 سجل المخاطر</h3>
+        <div class="table-container"><table class="data-table"><thead><tr><th>#</th><th>المخاطرة</th><th>الفئة</th><th>الاحتمالية</th><th>التأثير</th><th>الدرجة</th><th>الاستراتيجية</th></tr></thead><tbody id="risk-table-body"></tbody></table></div>
+      </div>
+
+      <div class="tab-content" id="tab-kpi">
+        <div class="page-header"><h1>🎯 مؤشرات الأداء KPI</h1></div>
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </div>
+
+      <div class="tab-content" id="tab-reports">
+        <div class="page-header"><h1>📑 التقارير التنفيذية</h1></div>
+        <div class="reports-grid" id="reports-grid"></div>
+      </div>
+
+      <div class="tab-content" id="tab-database">
+        <div class="page-header"><h1>🗄️ قاعدة البيانات</h1></div>
+        <div class="export-panel"><h3>📤 تصدير البيانات</h3>
+          <div class="export-btns">
+            <button class="eb" onclick="exportToCSV('all')"><span>📄</span>CSV</button>
+            <button class="eb" onclick="exportToExcel()"><span>📊</span>Excel</button>
+            <button class="eb" onclick="exportToJSON()"><span>🔧</span>JSON/API</button>
+            <button class="eb" onclick="exportToPDF()"><span>📕</span>PDF</button>
+            <button class="eb" onclick="showPowerBI()"><span>📈</span>Power BI</button>
+            <button class="eb" onclick="showSAP()"><span>⚙️</span>SAP/ERP</button>
+          </div>
+        </div>
+        <div class="db-tables" id="db-tables"></div>
+      </div>
+
+    </div><!-- content-area -->
+  </main>
+
+</div><!-- layout-wrapper -->
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <svg viewBox="0 0 60 40" height="32" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,0 60,0 60,30" fill="#9A754F"/><polygon points="0,40 0,10 30,40" fill="#9A754F"/>
+        <polygon points="0,0 30,0 0,30" fill="#4F9D6F"/><polygon points="30,40 60,40 60,10" fill="#4F9D6F"/>
+        <polygon points="30,8 52,30 30,32 8,30" fill="#86519B"/>
+        <polygon points="30,15 45,30 30,35 15,30" fill="white"/>
+      </svg>
+      <span>© 2025 RIPC Knowledge Base</span>
+    </div>
+    <div class="footer-center">
+      <span>مركز مشاريع البنية التحتية بمنطقة الرياض</span>
+    </div>
+    <div class="footer-right">
+      <div class="footer-contact">
+        <span class="dept-title">إدارة البنية التحتية - قسم التنسيقات والرخص</span>
+        <span class="eng-name">م. علي عبد الله الجدع</span>
+      </div>
+      <a href="mailto:asas.today2030@gmail.com" class="footer-icon email-icon" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+      </a>
+      <a href="https://wa.me/966596439721" target="_blank" class="footer-icon wa-icon" title="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a href="https://t.me/+966596439721" target="_blank" class="footer-icon tg-icon" title="Telegram">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FLOATING AI BUTTON ===================== -->
+<a href="https://gemini.google.com/gem/1ZWAMoRV6YmsVOrBaflmFUQKmod6mgZIo?usp=sharing" target="_blank" class="ai-float-btn" title="المساعد الذكي RIPC">
+  <div class="ai-float-ring"></div>
+  <div class="ai-float-inner">
+    <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="white" opacity="0.3"/>
+      <circle cx="12" cy="12" r="5" fill="white"/>
+      <path d="M9 9l2 2 4-4" stroke="#4F9D6F" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="7" r="1.5" fill="white"/>
+      <path d="M8 14h8M10 17h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="ai-float-label">Gemini</div>
+  <div class="ai-float-pulse"></div>
+</a>
+
+<!-- ===================== AI CHAT PANEL ===================== -->
+<div class="ai-chat-overlay" id="ai-chat-overlay">
+  <div class="ai-chat-panel" id="ai-chat-panel">
+    <!-- Panel Header -->
+    <div class="acp-header">
+      <div class="acp-header-left">
+        <div class="acp-avatar">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <circle cx="20" cy="20" r="20" fill="url(#aigrad)"/>
+            <defs><linearGradient id="aigrad" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#4F9D6F"/><stop offset="100%" stop-color="#86519B"/></linearGradient></defs>
+            <text x="20" y="27" text-anchor="middle" font-size="18" fill="white">🤖</text>
+          </svg>
+          <div class="acp-online-dot"></div>
+        </div>
+        <div class="acp-info">
+          <div class="acp-name">المساعد الذكي RIPC</div>
+          <div class="acp-status"><span class="acp-dot"></span>متصل | مدعوم بـ Gemini AI</div>
+        </div>
+      </div>
+      <div class="acp-actions">
+        <button class="acp-btn" onclick="clearChat()" title="مسح">🗑️</button>
+        <button class="acp-btn" onclick="toggleConfigPanel()" title="إعدادات">⚙️</button>
+        <button class="acp-btn acp-close" onclick="toggleAIChat()" title="إغلاق">✕</button>
+      </div>
+    </div>
+
+    <!-- Config Panel -->
+    <div class="acp-config" id="ai-config-panel">
+      <div class="acp-config-inner">
+        <div style="font-size:36px;margin-bottom:10px">🔑</div>
+        <h4>إعداد مفتاح Gemini AI</h4>
+        <p>احصل على مفتاح مجاني من<br><a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com ↗</a></p>
+        <div class="acp-config-row">
+          <input type="password" id="ai-api-key" placeholder="أدخل مفتاح Gemini API هنا..." />
+          <button onclick="saveApiKey()">حفظ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Messages -->
+    <div class="acp-messages" id="ai-messages"></div>
+
+    <!-- Quick Questions -->
+    <div class="acp-quick" id="ai-chat-main">
+      <div class="acp-quick-title">أسئلة شائعة:</div>
+      <div class="acp-quick-btns">
+        <button onclick="askQuestion('ما هي غرامة العمل بدون ترخيص؟')">🚫 بدون ترخيص</button>
+        <button onclick="askQuestion('كيف أتقدم باعتراض على مخالفة؟')">📋 الاعتراض</button>
+        <button onclick="askQuestion('ما هي متطلبات ترخيص الحفر؟')">🏗️ ترخيص الحفر</button>
+        <button onclick="askQuestion('ما عقوبة إتلاف خطوط الخدمات؟')">⚡ إتلاف الخدمات</button>
+        <button onclick="askQuestion('ما هي مدة صلاحية الترخيص؟')">⏱️ مدة الترخيص</button>
+        <button onclick="askQuestion('ما هي متطلبات اعتماد المقاول؟')">👷 اعتماد المقاول</button>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="acp-input-row">
+      <input type="text" id="ai-input" placeholder="اكتب سؤالك عن RIPC هنا..." />
+      <button class="acp-send" onclick="sendAIMessage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script src="ai-chat.js"></script>
+</body>
+</html>
